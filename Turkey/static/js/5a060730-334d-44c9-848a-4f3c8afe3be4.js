@@ -1,0 +1,19 @@
+'use strict';function urlB64ToUint8Array(base64String){const padding='='.repeat((4-base64String.length%4)%4);const base64=(base64String+padding).replace(/-/g,'+').replace(/_/g,'/');const rawData=window.atob(base64);const outputArray=new Uint8Array(rawData.length);for(var i=0;i<rawData.length;++i){outputArray[i]=rawData.charCodeAt(i);}
+return outputArray;}
+var apiBase="https://panel.notificup.com/api";var itest=istest();var workerUrl="/service-worker.js";var permissionDelay=parseInt("3");var qkey="5a060730-334d-44c9-848a-4f3c8afe3be4";var globalReg;var period=parseInt("3");var enabledWelcome=JSON.parse("false");var welTitle="www.kizilay.org.tr'ye hoşgeldiniz";var welBody="Teşekkür Ederiz";var cssFile="https://cdn.notificup.com/style/base/main.css";addCssFile();if('serviceWorker'in navigator&&'PushManager'in window){navigator.serviceWorker.register(workerUrl).then(function(){return navigator.serviceWorker.ready;}).then(function(registration){globalReg=registration;return globalReg.pushManager.getSubscription().then(function(subscription){if(subscription){if(itest)Log("already subscribed",subscription);var eski=false;if(subscription.options.applicationServerKey)
+if(subscription.options.applicationServerKey.byteLength<20)
+eski=true;if(eski)
+newPermission();else if
+(itest)console.log("new subs");}else{if(canAsk()){localStorage.setItem("nday",getDayOfYear());setTimeout(newPermission,permissionDelay*1000);}}});}).catch(function(error){if(itest)console.log('Service Worker error :^(',error);});}
+var pubkey="BONF0kcOW7uAWBnwghwgtjDGV-hmtrzjAIPspqc6etZ6YquDp59GwEXxxk3gPJQewhSaDNaBUrnGyFg07tRowog";function newPermission(){return globalReg.pushManager.getSubscription().then(function(subscription){if(subscription){if(itest)Log("oldsubscription",subscription,false);return subscription.unsubscribe().then(process(true));}
+return process(false);})}
+function processWelcome(){if(enabledWelcome){var options={body:welBody,};new Notification(welTitle,options);}}
+function process(isOld){return globalReg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:urlB64ToUint8Array(pubkey)}).then(function(newSubscription){if(itest)Log("newSubscription",newSubscription,false);var data={};if(isOld)data["isold"]="1";data["subscription"]=JSON.stringify(newSubscription);data["lang"]=GetLang();data["tz"]=new Date().getTimezoneOffset();FetchHelper(apiBase+"/register",data);processWelcome();console.log("line");if(itest)Log("register data",data,false);}).catch(function(err){if(itest)Log("subscription err",err,true);});}
+function Log(str1,str2,send){console.log(str1);console.log(str2);if(send)FetchHelper(apiBase+"/error",{"label":str1,"err":str2})}
+function GetLang(){var language=window.navigator.userLanguage||window.navigator.language;return language.substring(0,2);}
+function FetchHelper(url,data){data["qkey"]=qkey;return fetch(url,{method:'post',body:JSON.stringify(data),credentials:'include',})}
+function istest(){return localStorage.getItem("istest")==="1";}
+function canAsk(){if(Notification.permission==="granted")return false;if(!("nday"in localStorage))return true;var nday=parseInt(localStorage.getItem("nday"));var today=getDayOfYear();if(nday>today)today+=365;return(today-nday)>=period;}
+function getDayOfYear(){var now=new Date();var start=new Date(now.getFullYear(),0,0);var diff=now-start;var oneDay=1000*60*60*24;return Math.floor(diff/oneDay);}
+function addCssFile(){var fileref=document.createElement("link");fileref.setAttribute("rel","stylesheet");fileref.setAttribute("type","text/css");fileref.setAttribute("href",cssFile);if(typeof fileref!=="undefined")
+document.getElementsByTagName("head")[0].appendChild(fileref);}

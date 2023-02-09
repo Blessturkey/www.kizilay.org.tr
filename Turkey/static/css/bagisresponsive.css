@@ -1,0 +1,160 @@
+/*credikart� bilgileri number yapt�k ama  spin okalr�n� gizleyelim*/
+select.form-fixer, input.form-fixer {
+    padding: 4px;
+    /*font-size: 19px;*/
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+/*Ba��� Yap Sayfas�*/
+.etabs {
+    margin: 0 0 -4px;
+    padding: 0;
+    border-bottom: none;
+}
+
+.tab {
+    zoom: 1;
+    *display: inline;
+    background: #f9f9f9;
+    border-image: none;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    display: inline-block;
+    border-color: #CCC;
+    border-bottom: 2px #f9f9f9 solid;
+    min-width: 100px;
+    text-align: center;
+    font-weight: bold;
+   
+}
+
+    .tab a {
+        display: block;
+        font-size: 14px;
+        line-height: 2em;
+        outline: medium none;
+        color: #999;
+        border-bottom: 2px #f9f9f9 solid;
+   
+    }
+
+    .tab.right {
+        float: right;
+        display: inherit;
+    }
+
+        .tab.right.active {
+            float: right;
+            top: -12px;
+        }
+
+    .tab a:hover {
+       
+        border: none;
+        border-bottom: 2px #c10100 solid;
+    }
+
+    .tab.active {
+        background: #fff;
+        color: #bf0211;
+        padding-top: 6px;
+        position: relative;
+        top: 1px;
+        border: none;
+        border-bottom: 2px #c10100 solid;
+        -webkit-box-shadow: inset 0 3px 5px rgba(0,0,0,.125);
+        box-shadow: inset 0 3px 5px rgba(0,0,0,.125)
+    }
+
+    .tab a.active {
+        font-weight: bold;
+        color: #bf0211;
+
+    }
+
+ul.etabs li.disabled a {
+    color: #999;
+    cursor: default;
+}
+
+.tab-container .panel-container {
+    background: #999;
+    min-height: 260px;
+    border: none;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.panel-container {
+    margin-bottom: 10px;
+}
+#GiroGateLogoBANCONTACT, #GiroGateLogoEPS, #GiroGateLogoGIROPAY, #GiroGateLogoIDEAL, #GiroGateLogoMYBANK, #GiroGateLogoSOFORT {
+    width: 200px;
+    height: 80px;
+    background-repeat: no-repeat;
+}
+#GiroGateLogoBANCONTACT {
+    background: url(../images/girogatelogo.png) 0 0px;
+}
+#GiroGateLogoEPS {
+    background: url(../images/girogatelogo.png) 0px -80px;
+}
+#GiroGateLogoGIROPAY {
+    background: url(../images/girogatelogo.png) 0px -160px;
+}
+#GiroGateLogoIDEAL {
+    background: url(../images/girogatelogo.png) 0px -240px;
+}
+#GiroGateLogoMYBANK {
+    background: url(../images/girogatelogo.png) 0px -320px;
+}
+#GiroGateLogoSOFORT {
+    background: url(../images/girogatelogo.png) 0px -400px;
+}
+.VisaMasterSecureLogo {
+    width: 200px;
+    height: 80px;
+    background: url(../images/girogatelogo.png) 0 -480px;
+}
+
+.radio-toolbar {
+    margin: 2px;
+}
+
+    .radio-toolbar input[type="radio"] {
+        opacity: 0;
+        position: fixed;
+        width: 0;
+    }
+
+    .radio-toolbar label {
+        display: inline-block;
+        background-color: #fff;
+        padding: 6px 6px;
+        font-size: 16px;
+        border: 1px solid #B1B1B1;
+        border-radius: 4px;
+    }
+
+        .radio-toolbar label:hover {
+            background-color: #ddd;
+        }
+
+    .radio-toolbar input[type="radio"]:focus + label {
+        border: none;
+    }
+
+    .radio-toolbar input[type="radio"]:checked + label {
+        color: #ffffff;
+        background-color: #c10100;
+        border: 1px solid #B1B1B1;
+    }
+
